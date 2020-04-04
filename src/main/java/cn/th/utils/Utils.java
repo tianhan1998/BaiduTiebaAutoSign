@@ -199,7 +199,7 @@ public class Utils {
                     System.out.println("一键签到成功，已经一键签到了" + success + "个吧" + "签到失败" + fail + "个吧");
                     return true;
                 case "1990055":
-                    System.out.println("签到失败，请检查你的BDUSS是否正确");
+                    System.err.println("签到失败，请检查你的BDUSS是否正确");
                     throw new BDUSSException("BDUSS有误");
                 default:
                     System.out.println(json.getString("error") + "代码" + stat);
@@ -233,7 +233,7 @@ public class Utils {
                 } else if (status.equals("1101")) {
                     System.out.println(s + "吧已经签到过");
                 } else {
-                    System.out.println(s + "吧签到出错------->" + json.getString("error"));
+                    System.err.println(s + "吧签到出错------->" + json.getString("error"));
                     if (retry) {
                         fails.add(s);
                     }
@@ -249,7 +249,7 @@ public class Utils {
     public static void allSigned() {
         List<String> fail = new ArrayList<>();
         if (!oneKeySigned()) {
-            System.out.println("一键签到失败");
+            System.err.println("一键签到失败");
         }
         System.out.println("---------------轮询签到启动---------------");
         List<String> allUnsigned = getAllUnsignedTieBa();
@@ -271,13 +271,13 @@ public class Utils {
                     }
                 }
                 if(fail.size()!=0){
-                    System.out.println(fail.size()+"个吧签到失败，请重新执行签到程序");
+                    System.err.println(fail.size()+"个吧签到失败，请重新执行签到程序");
                 }
             }else{
                 System.out.println("所有贴吧签到成功!!");
             }
         } else {
-            System.out.println("获取未签到贴吧失败");
+            System.err.println("获取未签到贴吧失败");
         }
     }
     public static void changeConfig() {
@@ -303,7 +303,7 @@ public class Utils {
             Properties properties = new Properties();
             String bduss;
             if (!conf.exists()) {
-                System.out.println("未找到对应配置文件,自动创建配置文件中");
+                System.err.println("未找到对应配置文件,自动创建配置文件中");
                 System.out.println("请输入您百度对应的BDUSS，通常在浏览器F12的存储项里，注：BDUSS不会泄露给别人，包括我");
                 bduss = scan.nextLine();
                 properties.setProperty("BDUSS", bduss);
