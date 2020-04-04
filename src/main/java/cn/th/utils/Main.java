@@ -1,5 +1,6 @@
 package cn.th.utils;
 
+import cn.th.utils.Utils;
 import org.apache.http.message.BasicHeader;
 import org.jsoup.helper.StringUtil;
 

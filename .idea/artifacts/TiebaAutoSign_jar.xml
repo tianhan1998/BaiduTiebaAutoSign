@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact name="TiebaAutoSign:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TiebaAutoSign_jar</output-path>
+    <root id="root">
+      <element id="archive" name="TiebaAutoSign.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="TiebaAutoSign" />
+      </element>
+      <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.67" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.6" />
+      <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.10" />
+      <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.8.3" />
+      <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
+    </root>
+  </artifact>
+</component>

@@ -189,21 +189,21 @@ public class Utils {
             JSONObject json = (JSONObject) JSON.parse(EntityUtils.toString(response.getEntity(), "utf-8"));
             response.close();
             String stat=json.getString("no");
-            if (stat.equals("2280006")) {
-                System.out.println("您已经一键签到过了");
-                return false;
-            } else if(stat.equals("0")){
-                String success = json.getJSONObject("data").getString("signedForumAmount");
-                String fail = json.getJSONObject("data").getString("unsignedForumAmount");
-                System.out.println("一键签到成功，已经一键签到了" + success + "个吧" + "签到失败" + fail + "个吧");
-                return true;
-            }else if(stat.equals("1990055")){
-                System.out.println("签到失败，请检查你的BDUSS是否正确");
-                throw new BDUSSException("BDUSS有误");
-            }
-            else{
-                System.out.println(json.getString("error")+"代码"+stat);
-                return false;
+            switch (stat) {
+                case "2280006":
+                    System.out.println("您已经一键签到过了");
+                    return false;
+                case "0":
+                    String success = json.getJSONObject("data").getString("signedForumAmount");
+                    String fail = json.getJSONObject("data").getString("unsignedForumAmount");
+                    System.out.println("一键签到成功，已经一键签到了" + success + "个吧" + "签到失败" + fail + "个吧");
+                    return true;
+                case "1990055":
+                    System.out.println("签到失败，请检查你的BDUSS是否正确");
+                    throw new BDUSSException("BDUSS有误");
+                default:
+                    System.out.println(json.getString("error") + "代码" + stat);
+                    return false;
             }
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
