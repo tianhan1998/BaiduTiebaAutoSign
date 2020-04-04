@@ -328,7 +328,7 @@ public class Utils {
         System.out.println("4.获取所有喜欢的吧");
         System.out.println("5.获取所有未签到吧名单");
         System.out.println("6.退出");
-        String oper = scan.next();
+        String oper = scan.nextLine();
         if (StringUtil.isNumeric(oper)) {
             int op = Integer.parseInt(oper);
             switch (op) {
@@ -338,7 +338,8 @@ public class Utils {
                 case 2:
                     Utils.oneKeySigned();
                     break;
-                case 3:
+                case 3:Utils.changeConfig();
+                    break;
                 case 4:
                     System.out.println(Utils.getTieBaLiked());
                     break;
