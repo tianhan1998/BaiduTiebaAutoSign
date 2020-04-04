@@ -290,6 +290,7 @@ public class Utils {
             System.out.println("请输入您的新BDUSS");
             bduss=scan.nextLine();
             properties.setProperty("BDUSS",bduss);
+            properties.store(new FileOutputStream(new File("./config.properties")),"AutoSignedConfigFile");
             Utils.setCookieInHeaders(bduss);
             System.out.println("存储新的BDUSS成功");
         } catch (IOException e) {
