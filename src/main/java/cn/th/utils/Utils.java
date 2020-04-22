@@ -221,9 +221,9 @@ public class Utils {
 
     public static void signedByList(List<String> name, List<String> fails, Boolean retry) {
         List<NameValuePair> params = new ArrayList<>();
-        try {
-            for (String s : name) {
-                params.clear();
+        for (String s : name) {
+            params.clear();
+            try {
                 params.add(new BasicNameValuePair("ie", "utf-8"));
                 params.add(new BasicNameValuePair("tbs", getTbs()));
                 params.add(new BasicNameValuePair("kw", s));
@@ -243,9 +243,13 @@ public class Utils {
                     }
                 }
                 response.close();
+            } catch (IOException | URISyntaxException e) {
+                System.out.println("签到"+s+"吧时出现问题");
+                e.printStackTrace();
+                if(retry){
+                    fails.add(s);
+                }
             }
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
         }
     }
 
