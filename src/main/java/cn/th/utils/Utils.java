@@ -243,7 +243,7 @@ public class Utils {
                     }
                 }
                 response.close();
-            } catch (IOException | URISyntaxException e) {
+            } catch (Exception e) {
                 System.out.println("签到"+s+"吧时出现问题");
                 e.printStackTrace();
                 if(retry){
@@ -268,8 +268,8 @@ public class Utils {
                     System.out.println("一共有" + fail.size() + "个吧签到失败，重试签到次数" + i + "/" + retry_num);
                     List<String> newFailed = new ArrayList<>();
                     signedByList(fail, newFailed, true);
+                    fail.clear();
                     if (newFailed.size() != 0) {
-                        fail.clear();
                         Collections.copy(fail,newFailed);
                         newFailed.clear();
                     } else {
