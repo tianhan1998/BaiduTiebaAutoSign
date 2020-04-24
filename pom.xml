@@ -6,7 +6,7 @@
 
   <groupId>cn.th</groupId>
   <artifactId>TiebaAutoSign</artifactId>
-  <version>1.${git.total.commit.count}-SNAPSHOT</version>
+  <version>1.0.2-SNAPSHOT</version>
 
   <name>TiebaAutoSign</name>
   <!-- FIXME change it to the project's website -->
@@ -57,23 +57,6 @@
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-        <plugin>
-          <groupId>pl.project13.maven</groupId>
-          <artifactId>git-commit-id-plugin</artifactId>
-          <version>3.0.1</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>revision</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <verbose>true</verbose>
-            <generateGitPropertiesFile>true</generateGitPropertiesFile>
-            <injectAllReactorProjects>true</injectAllReactorProjects>
-          </configuration>
-        </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
