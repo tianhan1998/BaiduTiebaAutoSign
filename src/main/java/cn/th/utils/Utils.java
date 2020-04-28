@@ -270,7 +270,7 @@ public class Utils {
                     signedByList(fail, newFailed, true);
                     fail.clear();
                     if (newFailed.size() != 0) {
-                        Collections.copy(fail,newFailed);
+                        fail=new ArrayList<>(newFailed);
                         newFailed.clear();
                     } else {
                         System.out.println("所有签到失败贴吧补签成功！");
