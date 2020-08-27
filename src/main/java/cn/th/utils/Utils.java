@@ -40,6 +40,10 @@ public class Utils {
     public static void setCookieInHeaders(String value){
         headers[2]=new BasicHeader("Cookie","BDUSS="+value);
     }
+    public static void setCookieAndRetryNumInHeaders(String value, int retryNum){
+        headers[2]=new BasicHeader("Cookie","BDUSS="+value);
+        retry_num=retryNum;
+    }
     public static String getTbs() {
         HttpGet get;
         try {
