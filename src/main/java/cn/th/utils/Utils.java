@@ -277,36 +277,36 @@ public class Utils {
 
     public static void allSigned(boolean easy) throws InterruptedException {
         List<String> fail = new ArrayList<>();
-        if (!oneKeySigned(easy)) {
-            System.err.println("一键签到失败");
-        }
         System.out.println("---------------轮询签到启动---------------");
         List<String> allUnsigned = getAllUnsignedTieBa();
-        if (allUnsigned != null) {
+        if(allUnsigned!=null&&!allUnsigned.isEmpty()) {
+            if (!oneKeySigned(easy)) {
+                System.err.println("一键签到失败");
+            }
             System.out.println("获取未签到贴吧成功！当前还有" + allUnsigned.size() + "个吧未签到");
             signedByList(allUnsigned, fail, true);
-            if(fail.size()!=0) {
+            if (!fail.isEmpty()) {
                 for (int i = 1; i <= retry_num; i++) {
                     System.out.println("一共有" + fail.size() + "个吧签到失败，重试签到次数" + i + "/" + retry_num);
                     List<String> newFailed = new ArrayList<>();
                     signedByList(fail, newFailed, true);
                     fail.clear();
-                    if (newFailed.size() != 0) {
-                        fail=new ArrayList<>(newFailed);
+                    if (!newFailed.isEmpty()) {
+                        fail = new ArrayList<>(newFailed);
                         newFailed.clear();
                     } else {
                         System.out.println("所有签到失败贴吧补签成功！");
                         break;
                     }
                 }
-                if(fail.size()!=0){
-                    System.err.println(fail.size()+"个吧签到失败，请重新执行签到程序");
+                if (!fail.isEmpty()) {
+                    System.err.println(fail.size() + "个吧签到失败，请重新执行签到程序");
                 }
-            }else{
+            } else {
                 System.out.println("所有贴吧签到成功!!");
             }
-        } else {
-            System.err.println("获取未签到贴吧失败");
+        }else{
+            System.out.println("已签到所有贴吧");
         }
     }
     public static void changeConfig() {
