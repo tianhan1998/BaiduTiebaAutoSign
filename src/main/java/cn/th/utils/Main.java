@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author tianh
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("---------------欢迎来到百度贴吧一键签到程序---------------");
         System.out.println("作者:田涵");
         Utils.checkConfig();

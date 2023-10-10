@@ -9,7 +9,7 @@ public interface Service {
     /**
      * 一键签到接口，调用网页端一键签到之后将未签到贴吧再次轮训签到
      */
-    void allSigned();
+    void allSigned() throws InterruptedException;
 
     /**
      * 取得所有关注的贴吧

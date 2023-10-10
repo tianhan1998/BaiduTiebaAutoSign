@@ -181,7 +181,7 @@ public class Utils {
         }
     }
 
-    public static boolean oneKeySigned(boolean easy) {
+    public static boolean oneKeySigned(boolean easy) throws InterruptedException {
         System.out.println("---------------一键签到启动---------------");
         List<NameValuePair> lists = new ArrayList<>();
         HttpPost post;
@@ -223,9 +223,10 @@ public class Utils {
         }
     }
 
-    public static void signedByList(List<String> name, List<String> fails, Boolean retry) {
+    public static void signedByList(List<String> name, List<String> fails, Boolean retry) throws InterruptedException {
         List<NameValuePair> params = new ArrayList<>();
         for (String s : name) {
+            Thread.sleep(1345);
             params.clear();
             try {
                 params.add(new BasicNameValuePair("ie", "utf-8"));
@@ -240,6 +241,23 @@ public class Utils {
                     System.out.println(s + "吧签到成功!");
                 } else if ("1101".equals(status)) {
                     System.out.println(s + "吧已经签到过");
+                //验证码处理
+                }else if("2150040".equals(status)&&json.getString("error").equals("need vcode")){
+                    String vcode_str= json.getJSONObject("data").getString("captcha_vcode_str");
+                    params.add(new BasicNameValuePair("captcha_input_str","de"));
+                    params.add(new BasicNameValuePair("captcha_vcode_str",vcode_str));
+                    post = getHttpPost(new URIBuilder(sign_url), params);
+                    response = client.execute(post);
+                    json = (JSONObject) JSON.parse(EntityUtils.toString(response.getEntity(), "utf-8"));
+                    status = json.getString("no");
+                    if (status.equals("0")) {
+                        System.out.println(s + "吧签到成功!");
+                    } else {
+                        System.err.println(s + "吧签到出错------->" + json.getString("error"));
+                        if (retry) {
+                            fails.add(s);
+                        }
+                    }
                 } else {
                     System.err.println(s + "吧签到出错------->" + json.getString("error"));
                     if (retry) {
@@ -257,7 +275,7 @@ public class Utils {
         }
     }
 
-    public static void allSigned(boolean easy) {
+    public static void allSigned(boolean easy) throws InterruptedException {
         List<String> fail = new ArrayList<>();
         if (!oneKeySigned(easy)) {
             System.err.println("一键签到失败");
@@ -331,7 +349,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
-    public static int menu() {
+    public static int menu() throws InterruptedException {
         System.out.println("---------------菜单---------------");
         System.out.println("1.一键签到(一键签到api+轮训签到)[推荐!]");
         System.out.println("2.一键api签到(网页版，最多签到50个)");

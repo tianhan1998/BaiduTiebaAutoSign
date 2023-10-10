@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ServiceImpl implements Service {
     @Override
-    public void allSigned() {
+    public void allSigned() throws InterruptedException {
         Utils.allSigned(true);
     }
 
